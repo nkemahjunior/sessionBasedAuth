@@ -1,6 +1,7 @@
 package com.zeco.springSecurityfinal;
 
 
+import org.springframework.boot.web.servlet.server.CookieSameSiteSupplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -39,7 +40,7 @@ public class Security {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+        configuration.setAllowedOrigins(Arrays.asList("https://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
         configuration.setAllowedHeaders(Arrays.asList(
 
@@ -74,6 +75,7 @@ public class Security {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
@@ -103,6 +105,11 @@ public class Security {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public CookieSameSiteSupplier cookieSameSiteSupplier(){
+        return CookieSameSiteSupplier.ofStrict();
     }
 
 
