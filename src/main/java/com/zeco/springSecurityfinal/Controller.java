@@ -12,9 +12,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 public class Controller {
@@ -22,6 +25,11 @@ public class Controller {
     private final AuthenticationManager authenticationManager;
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
     private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+
+
+    private final String HOME_VIEW_COUNT = "HOME_VIEW_COUNT";
+
+    SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
 
 
@@ -33,6 +41,7 @@ public class Controller {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+
 
 
 
@@ -68,6 +77,17 @@ public class Controller {
         return ResponseEntity.ok("great job");
     }
 
+    @PostMapping("/logout1")
+    public Test3 performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
+        // .. perform logout
+        this.logoutHandler.logout(request, response, authentication);
+
+        Test3 obj = new Test3();
+        obj.setTest3Data("sucessfully logout");
+
+        return obj;
+    }
+
     @PostMapping("/test1")
     public String test1(@RequestBody LoginRequest loginRequest){
 
@@ -77,16 +97,42 @@ public class Controller {
     }
 
 
-    @GetMapping("/test2")
+    @PostMapping("/test2")
     //@PreAuthorize("hasRole('ROLE_USER')")
-    public String test2(){
-        return "test2";
+    public Test3 test2(@RequestBody Test3 test3){
+        System.out.println("################################################################################################################");
+        System.out.println("################################################################################################################");
+        System.out.println(test3);
+        System.out.println("################################################################################################################");
+        System.out.println("################################################################################################################");
+
+        return test3;
     }
 
 
     @GetMapping("/test3")
-    public String test3(){
-        return "test3";
+    public Test3 test3(){
+
+        Test3 obj = new Test3();
+        obj.setTest3Data("yessssssssssssssssss you did it");
+        return obj;
+    }
+
+    @GetMapping("/track")
+    public String track(Principal principal, HttpSession session){
+        incrementCount(session,HOME_VIEW_COUNT);
+        return "hello, " + principal.getName();
+    }
+
+    @GetMapping("/count")
+    public String count(HttpSession session){
+        return  "HOME_VIEW_COUNT : " + session.getAttribute(HOME_VIEW_COUNT);
+    }
+
+
+    public void incrementCount(HttpSession session,String attr){
+        int homeViewCount =  session.getAttribute(attr) == null ? 0 : (Integer)session.getAttribute(attr);
+        session.setAttribute(attr,homeViewCount);
     }
 
 

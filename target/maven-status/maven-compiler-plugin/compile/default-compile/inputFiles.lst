@@ -1,4 +1,7 @@
 /home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/LoginRequest.java
 /home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/Controller.java
+/home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/CsrfCookieFilter.java
 /home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/Security.java
+/home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/SpaCsrfTokenRequestHandler.java
+/home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/Test3.java
 /home/nkemah/Documents/LearnSpringBoot( check the other part on Github )/21-springSecurityfinal/src/main/java/com/zeco/springSecurityfinal/SpringSecurityfinalApplication.java
