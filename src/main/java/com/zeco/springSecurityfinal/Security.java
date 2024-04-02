@@ -121,10 +121,10 @@ public class Security {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    @Bean
+    /*@Bean
     public CookieSameSiteSupplier cookieSameSiteSupplier(){
         return CookieSameSiteSupplier.ofStrict();
-    }
+    }*/
 
 
 }
